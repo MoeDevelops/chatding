@@ -7,6 +7,7 @@ import gleam/dict
 import gleam/erlang/process
 import gleam/http.{Post}
 import gleam/result
+import gleam/string_tree
 import nakai
 import wisp.{type Request, type Response}
 import youid/uuid
@@ -37,6 +38,10 @@ fn post(req: Request, ctx: Context) -> Response {
 
     use _ <- result.try(case message_str {
       "" -> Error(wisp.unprocessable_entity())
+      "/clear" -> {
+        process.send(ctx.messages, messages.Set(string_tree.new()))
+        Ok(Nil)
+      }
       _ -> Ok(Nil)
     })
 

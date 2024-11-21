@@ -6,6 +6,7 @@ import gleam/string_tree.{type StringTree}
 pub type MessagesMessage {
   Add(StringTree)
   Get(Subject(StringTree))
+  Set(StringTree)
 }
 
 pub fn init() {
@@ -26,5 +27,8 @@ fn loop(
       actor.send(subject, state)
       Continue(state, None)
     }
+    Set(tree) ->
+      tree
+      |> Continue(None)
   }
 }
