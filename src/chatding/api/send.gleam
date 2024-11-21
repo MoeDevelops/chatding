@@ -42,7 +42,7 @@ fn post(req: Request, ctx: Context) -> Response {
 
     let message =
       message.view(id, message_str)
-      |> nakai.to_string_builder()
+      |> nakai.to_inline_string_builder()
 
     process.send(ctx.messages, Add(message))
     process.send(ctx.clients, NewMessage)
