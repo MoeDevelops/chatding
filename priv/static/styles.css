@@ -1,14 +1,14 @@
 @media (prefers-color-scheme: dark) {
     :root {
-        --text-color: white;
-        --background-color: black;
+        --text-color: #ffffff;
+        --background-color: #181819;
     }
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --text-color: black;
-        --background-color: white;
+        --text-color: #000000;
+        --background-color: #ffffff;
     }
 }
 
@@ -19,12 +19,8 @@
 }
 
 header {
-    justify-content: space-between;
     display: flex;
-    background-color: transparent;
-    align-items: center;
-    padding: 0px 1%;
-    height: 80px;
+    justify-content: center;
 }
 
 header a {
@@ -32,47 +28,44 @@ header a {
     color: var(--text-color);
 }
 
-nav a {
-    font-size: 20px;
-    font-weight: bold;
-    padding: 80px 20px;
-    cursor: pointer;
+main {
+    padding: 0px 2%;
 }
 
-main {
-    padding: 0px 40px;
+.connected-amount {
+    padding: 4px;
 }
 
 .message-list {
-	height: 50%;
-	border: 1px solid white;
-	padding: 20px;
-	overflow-y: scroll;
+    height: 50%;
+    border: 1px solid var(--text-color);
+    padding: 20px;
+    overflow-y: scroll;
 }
 
 .message {
-	display: flex;
-	justify-content: space-between;
-	padding: 10px;
-	border-bottom: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid var(--text-color);
 }
 
 .send-message-form {
-	display: flex;
-	justify-content: space-between;
-	padding: 10px;
-	border-bottom: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid var(--text-color);
 }
 
 .message-container {
-	display: flex;
-	flex-direction: column-reverse;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .message-content {
-	line-break: anywhere;
+    line-break: anywhere;
 }
 
 .message-input {
-	width: 90%;
+    width: 90%;
 }

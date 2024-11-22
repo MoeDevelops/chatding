@@ -1,10 +1,9 @@
 import nakai/attr.{class}
 import nakai/html.{b_text, div, div_text}
-import youid/uuid.{type Uuid}
 
-pub fn view(id: Uuid, message: String) {
+pub fn view(name: String, message: String) {
   div([class("message")], [
-    b_text([], id |> uuid.to_string() <> ": "),
+    b_text([], name <> ": "),
     div_text([class("message-content")], message),
   ])
 }

@@ -3,9 +3,10 @@ import chatding/context/clients.{NewMessage}
 import chatding/context/messages.{Add}
 import chatding/view/message
 import chatding/view/message_send
-import gleam/dict
 import gleam/erlang/process
 import gleam/http.{Post}
+import gleam/list
+import gleam/option.{Some}
 import gleam/result
 import gleam/string_tree
 import nakai
@@ -23,7 +24,7 @@ fn post(req: Request, ctx: Context) -> Response {
   use form <- wisp.require_form(req)
 
   let result = {
-    use id <- result.try(
+    use _id <- result.try(
       wisp.get_cookie(req, "sessionid", wisp.PlainText)
       |> result.then(uuid.from_string)
       |> result.replace_error(wisp.response(401)),
@@ -31,10 +32,20 @@ fn post(req: Request, ctx: Context) -> Response {
 
     use message_str <- result.try(
       form.values
-      |> dict.from_list()
-      |> dict.get("message")
+      |> list.key_find("message")
       |> result.replace_error(wisp.unprocessable_entity()),
     )
+
+    use name <- result.try(
+      form.values
+      |> list.key_find("name")
+      |> result.replace_error(wisp.unprocessable_entity()),
+    )
+
+    use _ <- result.try(case name {
+      "" -> Error(wisp.unprocessable_entity())
+      _ -> Ok(Nil)
+    })
 
     use _ <- result.try(case message_str {
       "" -> Error(wisp.unprocessable_entity())
@@ -46,20 +57,20 @@ fn post(req: Request, ctx: Context) -> Response {
     })
 
     let message =
-      message.view(id, message_str)
+      message.view(name, message_str)
       |> nakai.to_inline_string_builder()
 
     process.send(ctx.messages, Add(message))
     process.send(ctx.clients, NewMessage)
-    Ok(Nil)
+    Ok(name)
   }
 
   case result {
-    Ok(_) ->
+    Ok(name) ->
       wisp.ok()
       |> wisp.set_header("Content-Type", "text/html")
       |> wisp.string_builder_body(
-        message_send.view() |> nakai.to_inline_string_builder(),
+        message_send.view(Some(name)) |> nakai.to_inline_string_builder(),
       )
     Error(err) -> err
   }
