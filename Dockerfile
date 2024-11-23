@@ -1,4 +1,5 @@
 FROM alpine:edge
+LABEL org.opencontainers.image.source=https://github.com/MoeDevelops/chatding
 
 # Install packages
 RUN apk update && \
