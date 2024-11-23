@@ -2,7 +2,7 @@ name: publish
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   publish:
@@ -18,5 +18,5 @@ jobs:
           password: ${{secrets.REGISTRY_TOKEN}}
       - name: Build image
         run: |
-          docker build . -t ghcr.io/moedevelops/chatding:latest
+          docker build . -t ghcr.io/moedevelops/chatding:latest -t ghcr.io/moedevelops/chatding:${{github.event.release.tag_name}}
           docker push ghcr.io/moedevelops/chatding:latest
