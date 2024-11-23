@@ -57,6 +57,10 @@ main {
     border-bottom: 1px solid var(--text-color);
 }
 
+.send-message-form > * {
+    margin: 0px 5px;
+}
+
 .message-container {
     display: flex;
     flex-direction: column-reverse;
