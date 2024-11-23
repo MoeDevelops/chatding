@@ -20,3 +20,4 @@ jobs:
         run: |
           docker build . -t ghcr.io/moedevelops/chatding:latest -t ghcr.io/moedevelops/chatding:${{github.event.release.tag_name}}
           docker push ghcr.io/moedevelops/chatding:latest
+          docker push ghcr.io/moedevelops/chatding:${{github.event.release.tag_name}}
