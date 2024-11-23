@@ -19,6 +19,7 @@ jobs:
       - name: Build image
         run: |
           export VERSION=$(sed 's/^.//' <<< ${{github.event.release.tag_name}})
-          docker build . -t ghcr.io/moedevelops/chatding:latest -t ghcr.io/moedevelops/chatding:$VERSION
-          docker push ghcr.io/moedevelops/chatding:latest
-          docker push ghcr.io/moedevelops/chatding:$VERSION
+          export REPO=$(sed 's/\(.*\)/\L\1/' <<< $GITHUB_REPOSITORY)
+          docker build . -t ghcr.io/$REPO:latest -t ghcr.io/$REPO:$VERSION
+          docker push ghcr.io/$REPO:latest
+          docker push ghcr.io/$REPO:$VERSION
