@@ -22,7 +22,7 @@ Chatding is a reimplementation of the [Chatthing](https://github.com/0x6DD8/chat
 
 ```sh
 git clone https://github.com/MoeDevelops/chatding
-cd chatthing
+cd chatding
 ```
 
 2. Build the project:
