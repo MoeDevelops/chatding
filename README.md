@@ -50,7 +50,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgements
 
 - [Chatthing](https://github.com/0x6DD8/chatthing) - The original project that inspired this reimplementation.
-- [nakai](https://github.com/nakaixo/nakai) - A Gleam library for building HTML on the server.
+- [nakai](https://github.com/aslilac/nakai) - A Gleam library for building HTML on the server.
 - [mist](https://github.com/rawhat/mist) - A Gleam http server with sse support.
 - [wisp](https://github.com/gleam-wisp/wisp) - A Gleam web framework built on mist.
 - [htmx](https://github.com/bigskysoftware/htmx) - A library for accessing modern browser features directly from HTML.
