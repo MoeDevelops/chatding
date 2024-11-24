@@ -61,7 +61,7 @@ fn loop(
       case
         mist.send_event(
           connection,
-          mist.event(join.view(amount) |> nakai.to_inline_string_builder())
+          mist.event(join.view(amount) |> nakai.to_inline_string_tree())
             |> mist.event_name("join"),
         )
       {

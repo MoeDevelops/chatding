@@ -58,7 +58,7 @@ fn post(req: Request, ctx: Context) -> Response {
 
     let message =
       message.view(name, message_str)
-      |> nakai.to_inline_string_builder()
+      |> nakai.to_inline_string_tree()
 
     process.send(ctx.messages, Add(message))
     process.send(ctx.clients, NewMessage)
@@ -70,7 +70,7 @@ fn post(req: Request, ctx: Context) -> Response {
       wisp.ok()
       |> wisp.set_header("Content-Type", "text/html")
       |> wisp.string_builder_body(
-        message_send.view(Some(name)) |> nakai.to_inline_string_builder(),
+        message_send.view(Some(name)) |> nakai.to_inline_string_tree(),
       )
     Error(err) -> err
   }
