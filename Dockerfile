@@ -1,23 +1,15 @@
-FROM alpine:edge
-LABEL org.opencontainers.image.source=https://github.com/MoeDevelops/chatding
+FROM ghcr.io/gleam-lang/gleam:v1.8.1-erlang-slim AS builder
 
-# Install packages
-RUN apk update && \
-    apk add gleam rebar3 erlang
-
-# Build project
 WORKDIR /build
+
+COPY *.toml .
+RUN gleam deps download
+
 COPY . .
-RUN gleam deps download && \
-    gleam export erlang-shipment && \
-    mv /build/build/erlang-shipment /app
+RUN gleam export erlang-shipment
 
-# Clean up
-RUN rm -rf /build
-RUN apk del gleam rebar3 && \
-    apk cache clean
+FROM erlang:alpine
 
-# Start container
 WORKDIR /app
-EXPOSE 5001
+COPY --from=builder /build/build/erlang-shipment /app
 ENTRYPOINT [ "./entrypoint.sh", "run" ]
