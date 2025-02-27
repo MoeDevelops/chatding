@@ -69,7 +69,7 @@ fn post(req: Request, ctx: Context) -> Response {
     Ok(name) ->
       wisp.ok()
       |> wisp.set_header("Content-Type", "text/html")
-      |> wisp.string_builder_body(
+      |> wisp.string_tree_body(
         message_send.view(Some(name)) |> nakai.to_inline_string_tree(),
       )
     Error(err) -> err

@@ -40,7 +40,7 @@ fn handle_request_wisp(req: Request, ctx: Context) -> Response {
     ["api", "send"] -> send.handle(req, ctx)
     [] ->
       wisp.ok()
-      |> wisp.string_builder_body(root.view() |> nakai.to_string_tree())
+      |> wisp.string_tree_body(root.view() |> nakai.to_string_tree())
     _ -> wisp.not_found() |> wisp.string_body("Not found")
   }
 }
